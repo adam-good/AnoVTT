@@ -1,11 +1,16 @@
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import Column, Integer, String
+from webapp.database import Base
 
-db = SQLAlchemy()
+class User(Base):
+    __tablename__ = "users"
+    id = Column(Integer, primary_key=True)
+    username = Column(String(50), unique=True)
 
-class User(db.Model):
-    id: Mapped[int] = mapped_column(primary_key=True)
-    username: Mapped[str] = mapped_column(unique=True)
+    def __init__(self, username=None):
+        self.username = username
+
+    def __repr__(self):
+        return f'{self.serialize}'
 
     @property
     def serialize(self):

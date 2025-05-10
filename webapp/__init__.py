@@ -1,20 +1,20 @@
 __version__ = '0.1'
 from flask import Flask, render_template
-from flask_sqlalchemy import SQLAlchemy
+from webapp.database import session as db_session
+from webapp.database import init_db
 from os import urandom
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = urandom(32)
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///project.db"
 app.debug = True
 
-db = SQLAlchemy()
-db.init_app(app)
+# Database Setup
+init_db()
+@app.teardown_appcontext
+def shutdown_dbsession(exception=None):
+    db_session.remove()
 
-from webapp.models import *
-with app.app_context():
-    db.create_all()
-
+# Initialize Routing
 from webapp.routes.user_bp import user_bp
 app.register_blueprint(user_bp, url_prefix='/users')
 

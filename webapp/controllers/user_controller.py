@@ -1,20 +1,34 @@
 
 from webapp.models.user import User
-from flask_sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy()
+from webapp.database import session as db_session
+from flask import request
 
 def index():
-    raise NotImplementedError
+    result = User.query.all()
+    return ''.join([f"{user}" for user in result])
 
 def store():
-    raise NotImplementedError
+    form_data = request.form
+    name = form_data['name']
+    user = User(name)
+    db_session.add(user)
+    db_session.commit()
+    return "success"
 
-def show():
-    raise NotImplementedError
+def show(user_id: int):
+    user: User = User.query.filter(User.id == user_id).first()
+    return f"{user}"
 
-def update():
-    raise NotImplementedError
+def update(user_id: int):
+    form_data = request.form
+    name = form_data['name']
+    User.query.filter(User.id == user_id).update({
+        "username": name
+    })
+    db_session.commit()
+    return f"success"
 
-def destroy():
-    raise NotImplementedError
+def destroy(user_id: int):
+    User.query.filter(User.id == user_id).delete()
+    db_session.commit()
+    return f"success"
