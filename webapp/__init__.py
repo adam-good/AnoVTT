@@ -16,8 +16,12 @@ def shutdown_dbsession(exception=None):
 
 # Initialize Routing
 from webapp.routes.user_bp import user_bp
-app.register_blueprint(user_bp, url_prefix='/users')
+app.register_blueprint(user_bp)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('auth/index.html')
+
+@app.route('/new_user')
+def new_user():
+    return render_template('auth/register.html')
