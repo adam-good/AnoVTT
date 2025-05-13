@@ -1,23 +1,33 @@
 __version__ = '0.1'
+import os
 from flask import Flask, render_template
-from webapp.database import session as db_session
-from webapp.database import init_db
-from os import urandom
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = urandom(32)
-app.debug = True
+def create_app(test_config=None):
+    app = Flask(__name__, instance_relative_config=True)
+    app.config['SECRET_KEY'] = 'dev'
+    app.config['DATABASE'] = os.path.join(app.instance_path, 'webapp.db')
+    app.debug = True
 
-# Database Setup
-init_db()
-@app.teardown_appcontext
-def shutdown_dbsession(exception=None):
-    db_session.remove()
+    if test_config is None:
+        app.config.from_pyfile('config.py', silent=True)
+    else:
+        app.config.from_mapping(test_config)
 
-# Initialize Routing
-from webapp.routes.user_bp import user_bp
-app.register_blueprint(user_bp, url_prefix='/users')
+    # Database Setup
+    import webapp.database as db
+    db.init_db()
+    @app.teardown_appcontext
+    def shutdown_db_session(exception=None):
+        db.session.remove()
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+    # Initialize Routing
+    from webapp.routes.user_bp import user_bp
+    from webapp.routes.auth_bp import auth_bp
+    app.register_blueprint(user_bp)
+    app.register_blueprint(auth_bp)
+
+    @app.route('/')
+    def index():
+        return render_template('index.html')
+
+    return app

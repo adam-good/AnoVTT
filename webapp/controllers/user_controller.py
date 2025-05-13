@@ -1,19 +1,28 @@
 
 from webapp.models.user import User
 from webapp.database import session as db_session
-from flask import request
+from flask import request, render_template
 
 def index():
     result = User.query.all()
     return ''.join([f"{user}" for user in result])
 
 def store():
-    form_data = request.form
-    name = form_data['name']
-    user = User(name)
+    username = request.form['username']
+    password = request.form['password']
+    user = User(username, password)
     db_session.add(user)
     db_session.commit()
-    return "success"
+    return render_template('auth/register.html')
+
+def validate():
+    username = request.form['username']
+    password = request.form['password']
+    user: User = User.query.filter(User.username == username).first()
+    if user.validate(password):
+        return "Success"
+    else:
+        return "Fail"
 
 def show(user_id: int):
     user: User = User.query.filter(User.id == user_id).first()
