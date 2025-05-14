@@ -7,18 +7,20 @@
 {% block content %}
     <form method="post">
         <label for="name">Name</label>
-        <input name="name" id="name" required>
+        <input type="text" name="name" id="name" required>
 
         <label for="might">Might</label>
-        <input name="might" id="might">
+        <input type="number" name="might" id="might">
 
         <label for="edge">Edge</label>
-        <input name="edge" id="edge">
+        <input type="number" name="edge" id="edge">
 
         <label for="grit">Grit</label>
-        <input name="grit" id="grit">
+        <input type="number" name="grit" id="grit">
 
-        <label for="might">Might</label>
-        <input name="might" id="might">
+        <label for="wits">Wits</label>
+        <input type="number" name="wits" id="wits">
+
+        <input type="submit" value="Create">
     </form>
 {% endblock %}
