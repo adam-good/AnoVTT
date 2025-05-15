@@ -17,15 +17,12 @@ class Statblock(Base):
     stamina_points:   Mapped[int | None] = mapped_column(Integer)
     flex_die:         Mapped[str | None] = mapped_column(String) # TODO: This will probably need some logic
 
-    def __init__(self,  name:       str|None = None,
-                        might:      int|None = None, 
-                        edge:       int|None = None,
-                        grit:       int|None = None, 
-                        wits:       int|None = None, 
-                        phy_def:    int|None = None,
-                        sor_def:    int|None = None, 
-                        life_points:int|None = None, 
-                        flex_die:   str|None = None):
+    def __init__(self,
+                 name:     str|None = None, might:       int|None = None, 
+                 edge:     int|None = None, grit:        int|None = None, 
+                 wits:     int|None = None, phy_def:     int|None = None,
+                 sor_def:  int|None = None, life_points: int|None = None, 
+                 flex_die: str|None = None):
         self.name = name
         self.might = might
         self.edge = edge
