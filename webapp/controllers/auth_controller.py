@@ -6,7 +6,7 @@ def login():
     elif request.method == "POST":
         return redirect(url_for("user.validate"), code=307)
     else:
-        "fuck"
+        return "fuck"
 
 def logout():
     return "logout success"
