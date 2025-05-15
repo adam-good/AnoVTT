@@ -1,6 +1,6 @@
 from webapp.models.statblock import Statblock
 from webapp.database import session as db_session
-from flask import request, render_template, url_for
+from flask import request, render_template
 
 def index():
     result = Statblock.query.all()
