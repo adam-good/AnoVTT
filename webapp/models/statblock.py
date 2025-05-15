@@ -1,25 +1,31 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Integer, String
+from sqlalchemy.orm import Mapped, mapped_column
 from webapp.database import Base
 
 class Statblock(Base):
     __tablename__ = "statblocks"
 
-    id = Column(Integer, primary_key=True)
-    name = Column(String(50), unique=True)
-    might = Column(Integer)
-    edge = Column(Integer)
-    grit = Column(Integer)
-    wits = Column(Integer)
-    physical_defence = Column(Integer)
-    sorcery_defence = Column(Integer)
-    life_points = Column(Integer)
-    stamina_points = Column(Integer)
-    flex_die = Column(String) # TODO: This will probably need some logic
+    id:     Mapped[int]         = mapped_column(Integer, primary_key=True)
+    name:   Mapped[str | None]  = mapped_column(String(50), unique=True) 
+    might:  Mapped[int | None]  = mapped_column(Integer)
+    edge:   Mapped[int | None]  = mapped_column(Integer) 
+    grit:   Mapped[int | None]  = mapped_column(Integer)
+    wits:   Mapped[int | None]  = mapped_column(Integer)
+    physical_defence: Mapped[int | None] = mapped_column(Integer)
+    sorcery_defence:  Mapped[int | None] = mapped_column(Integer)
+    life_points:      Mapped[int | None] = mapped_column(Integer)
+    stamina_points:   Mapped[int | None] = mapped_column(Integer)
+    flex_die:         Mapped[str | None] = mapped_column(String) # TODO: This will probably need some logic
 
-    def __init__(self, name: str = None, might: int = None, 
-                 edge: int = None, grit: int = None, wits: int = None,
-                 phy_def: int = None, sor_def: int = None, 
-                 life_points: int = None, flex_die: str = None):
+    def __init__(self,  name:       str|None = None,
+                        might:      int|None = None, 
+                        edge:       int|None = None,
+                        grit:       int|None = None, 
+                        wits:       int|None = None, 
+                        phy_def:    int|None = None,
+                        sor_def:    int|None = None, 
+                        life_points:int|None = None, 
+                        flex_die:   str|None = None):
         self.name = name
         self.might = might
         self.edge = edge
@@ -34,7 +40,7 @@ class Statblock(Base):
         return f'{self.serialize}'
 
     @property
-    def serialize(self):
+    def serialize(self) -> dict[str, object]:
         return {
             'id': self.id,
             'name': self.name,
