@@ -1,10 +1,22 @@
 from webapp.models.statblock import Statblock
 from webapp.database import session as db_session
-from flask import request, render_template, g
+from flask import request, render_template, redirect, url_for, g
 
 def index():
     result = Statblock.query.all()
     return ''.join([f'{statblock}' for statblock in result])
+
+def search():
+    if request.method == "GET":
+        return render_template("statblock/search.html")
+    elif request.method == "POST":
+        form_data = request.form
+        name: str = form_data['name']
+        # TODO: Fix this later
+        id: int = Statblock.query.filter(Statblock.name == name).first().id
+        return redirect(url_for("statblock.show", variable={'statblock_id':id}))
+    else:
+        return "fuck"
 
 def store():
     if request.method == "GET":
