@@ -1,6 +1,6 @@
 from webapp.models.statblock import Statblock
 from webapp.database import session as db_session
-from flask import request, render_template
+from flask import request, render_template, g
 
 def index():
     result = Statblock.query.all()
@@ -10,23 +10,32 @@ def store():
     if request.method == "GET":
         return render_template("statblock/create.html")
     elif request.method == "POST":
-        name = request.form['name']
-        might = int(request.form['might'])
-        edge = int(request.form['edge'])
-        grit = int(request.form['grit'])
-        wits = int(request.form['wits'])
-        statblock = Statblock(name, might, edge, grit, wits)
+        form_data = request.form
+        name:   str = form_data['name']
+        might:  int = int(form_data['might'])
+        edge:   int = int(form_data['edge'])
+        grit:   int = int(form_data['grit'])
+        wits:   int = int(form_data['wits'])
+        physical_defence:   int = int(form_data['physical_defence'])
+        sorcery_defence:    int = int(form_data['sorcery_defence'])
+        life_points:        int = int(form_data['life_points'])
+        stamina_points:     int = int(form_data['stamina_points'])
+        flex_die:           str = form_data['flex_die']
+        statblock = Statblock(name, might, edge, grit, wits, physical_defence, 
+                              sorcery_defence, life_points, stamina_points,
+                              flex_die)
         db_session.add(statblock)
         db_session.commit()
         return render_template("statblock/create.html")
     else:
         return "fuck"
     
-def show(id: int):
-    statblock: Statblock = Statblock.query.filter(Statblock.id == id).first()
-    return f"{statblock}"
+def show(statblock_id: int):
+    statblock: Statblock = Statblock.query.filter(Statblock.id == statblock_id).first()
+    g.statblock = statblock
+    return render_template('statblock/show.html')
 
-def update(id: int):
+def update(statblock_id: int):
     form_data = request.form
     name:   str = form_data['name']
     might:  int = int(form_data['might'])
@@ -39,7 +48,7 @@ def update(id: int):
     stamina_points:     int = int(form_data['stamina_points'])
     flex_die:           str = form_data['flex_die']
 
-    Statblock.query.filter(Statblock.id == id).update({
+    Statblock.query.filter(Statblock.id == statblock_id).update({
         'name': name,
         'might': might,
         'edge': edge,
@@ -54,7 +63,7 @@ def update(id: int):
     db_session.commit()
     return f"success"
 
-def destroy(id: int):
-    Statblock.query.filter(Statblock.id == id).delete()
+def destroy(statblock_id: int):
+    Statblock.query.filter(Statblock.id == statblock_id).delete()
     db_session.commit()
     return f"success"
