@@ -22,7 +22,7 @@
 </form>
 
 <form   action="{{ url_for('statblock.destroy', statblock_id=g.statblock['id']) }}"
-        method="POST">
+        method="DELETE"> {# TODO: This doens't work in HTML. Gotta script#}
     <input type="submit" value="Delete">
 </form>
 
