@@ -1,7 +1,7 @@
 from flask import Blueprint
 from webapp.controllers.user_controller import index, store, validate, show, update, destroy
 
-user_bp = Blueprint('user', __name__, url_prefix="/users")
+user_bp = Blueprint('user', __name__, url_prefix="/user")
 
 user_bp.route('/', methods=['GET'])(index)
 user_bp.route('/create', methods=['POST'])(store)

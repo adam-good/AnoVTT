@@ -23,8 +23,10 @@ def create_app(test_config=None):
     # Initialize Routing
     from webapp.routes.user_bp import user_bp
     from webapp.routes.auth_bp import auth_bp
+    from webapp.routes.statblock_bp import statblock_bp
     app.register_blueprint(user_bp)
     app.register_blueprint(auth_bp)
+    app.register_blueprint(statblock_bp)
 
     @app.route('/')
     def index():

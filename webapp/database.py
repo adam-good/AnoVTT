@@ -12,5 +12,5 @@ Base = declarative_base()
 Base.query = session.query_property()
 
 def init_db():
-    import webapp.models.user
+    import webapp.models
     Base.metadata.create_all(bind=engine)
