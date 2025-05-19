@@ -18,5 +18,8 @@
 
 <a href="{{ url_for('statblock.update', statblock_id=g.statblock['id']) }}">Update</a>
 
+<form action="/statblock/remove/{{ g.statblock['id'] }}" method="post">
+    <input type="submit" value="Delete">
+</form>
 
 {% endblock %}

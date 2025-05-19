@@ -83,6 +83,11 @@ def update(statblock_id: int):
         return "you found a bug in statblock.update"
 
 def destroy(statblock_id: int):
-    Statblock.query.filter(Statblock.id == statblock_id).delete()
+    query = Statblock.query.filter(Statblock.id == statblock_id)
+
+    statblock: Statblock = query.first()
+    g.statblock = statblock
+    query.delete()
+    # Statblock.query.filter(Statblock.id == statblock_id).delete()
     db_session.commit()
-    return f"success"
+    return render_template('/statblock/delete.html')
