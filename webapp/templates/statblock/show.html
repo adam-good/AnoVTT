@@ -16,9 +16,13 @@
 <p>Stamina: {{ g.statblock['stamina_points'] }}</p>
 <p>Flex Die: {{ g.statblock['flex_die'] }}</p>
 
-<a href="{{ url_for('statblock.update', statblock_id=g.statblock['id']) }}">Update</a>
+<form   action="{{ url_for('statblock.update', statblock_id=g.statblock['id']) }}"
+        method="GET">
+    <input type="submit" value="Update">
+</form>
 
-<form action="/statblock/remove/{{ g.statblock['id'] }}" method="post">
+<form   action="{{ url_for('statblock.destroy', statblock_id=g.statblock['id']) }}"
+        method="POST">
     <input type="submit" value="Delete">
 </form>
 
