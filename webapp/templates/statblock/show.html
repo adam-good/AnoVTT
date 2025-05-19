@@ -16,5 +16,7 @@
 <p>Stamina: {{ g.statblock['stamina_points'] }}</p>
 <p>Flex Die: {{ g.statblock['flex_die'] }}</p>
 
+<a href="{{ url_for('statblock.update', statblock_id=g.statblock['id']) }}">Update</a>
+
 
 {% endblock %}
