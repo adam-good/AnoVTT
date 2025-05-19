@@ -13,7 +13,7 @@ def login_post():
 
 @auth_bp.get("/logout")
 def logout():
-    return "logout success"
+    return render_template("/index.html")
 
 @auth_bp.get('/register')
 def register():

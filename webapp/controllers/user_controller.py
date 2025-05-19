@@ -1,7 +1,7 @@
 
 from webapp.models.user import User
 from webapp.database import session as db_session
-from flask import request, render_template
+from flask import request, render_template, g
 from flask import Blueprint
 
 user_bp = Blueprint('user', __name__, url_prefix="/user")
@@ -26,9 +26,10 @@ def validate():
     password = request.form['password']
     user: User = User.query.filter(User.username == username).first()
     if user.validate(password):
-        return "Success"
+        g.user = user
+        return render_template("/index.html")
     else:
-        return "Fail"
+        return render_template("/index.html")
 
 @user_bp.get('/<int:user_id>')
 def show(user_id: int):

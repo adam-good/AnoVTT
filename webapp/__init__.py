@@ -19,7 +19,7 @@ def create_app(test_config: Mapping[str,Any]|None = None) -> Flask:
     db.init_db()
 
     @app.teardown_appcontext
-    def shutdown_db_session(exception=None): # type: ignore[unused-function]
+    def shutdown_db_session(exception: BaseException|None = None): # type: ignore[unused-function]
         db.session.remove()
 
     # Initialize Routing
