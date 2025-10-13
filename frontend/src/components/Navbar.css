@@ -1,0 +1,30 @@
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  width: 100%;
+}
+
+.navbar-center .nav-links {
+  list-style-type: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-center .nav-links li {
+  margin-right: 1rem;
+  margin-left: 1rem;
+  flex-direction: row;
+}
+
+.navbar-right {
+}
+
+.navbar-right .nav-links {
+  list-style-type: none;
+  display: flex;
+}
+
