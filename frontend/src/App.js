@@ -1,6 +1,8 @@
-import logo from './logo.svg';
+//import logo from './logo.svg';
+import { RouterProvider } from 'react-router';
 import './App.css';
-import Navbar from './components/Navbar';
+import Navbar from './components/Navbar.jsx';
+import Router from './router.jsx';
 
 const Header = () => {
   return (
@@ -15,22 +17,17 @@ const Footer = () => {
   return <p>Copywrite 2025 My Stuff</p>;
 }
 
-const Body = () => {
-  return (
-    <div className='App-body'>
-      <h1>Helo World</h1>
-    </div>
-  )
-}
-
 function App() {
   return (
     <div className="App">
-      <Header />
-      <Body />
-      <Footer />
+    <Header />
+    <div class='App-body'>
+      <RouterProvider router={Router} />
+    </div>
+    <Footer />
     </div>
   );
 }
+
 
 export default App;

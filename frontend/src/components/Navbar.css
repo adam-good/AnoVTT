@@ -21,6 +21,7 @@
 }
 
 .navbar-right {
+  align-items: right;
 }
 
 .navbar-right .nav-links {
