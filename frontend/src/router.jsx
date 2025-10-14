@@ -7,7 +7,7 @@ import CharacterSheet from "./components/CharacterSheet.jsx";
 import Campaign from "./components/Campaign.jsx";
 import GameTable from "./components/GameTable.jsx";
 
-const Router = createBrowserRouter([
+const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />
@@ -38,4 +38,4 @@ const Router = createBrowserRouter([
   }
 ]);
 
-export default Router;
+export default router;
