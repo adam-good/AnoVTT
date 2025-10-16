@@ -42,6 +42,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -60,6 +61,7 @@
 
 .form-group {
   margin-bottom: 16px;
+  text-align: left;
 }
 
 .form-group label {
@@ -79,7 +81,7 @@ input[type="email"],
 input[type="password"],
 textarea,
 select {
-  width: 100%;
+  width: 90%;
   padding: 10px 12px;
   background: #2d3142;
   color: white;
@@ -111,7 +113,7 @@ button {
   border-radius: 4px;
   cursor: pointer;
   font-size: calc(10px + 2vmin);
-  width: 100%;
+  width: 50%;
   font-weight: 500;
   transition: all 0.2s;
   text-align: center;

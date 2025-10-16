@@ -5,11 +5,29 @@ const Signup = () => {
     <div className="form-container">
         <form>
             <div className="form-group">
-            <lable>Username: <input type="text" /></lable>
-            <lable>Email: <input type="email" /></lable>
-            <lable>Password: <input type="password" /></lable>
-            <button type="submit">Submit</button>
+            <lable htmlFor="username">Username:</lable>
+            <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Enter Username"
+            />
+            <lable>Email:</lable>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter Email"
+            />
+            <lable>Password:</lable>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="password"
+            />
             </div>
+            <button type="submit">Submit</button>
         </form>
     </div>
     );
