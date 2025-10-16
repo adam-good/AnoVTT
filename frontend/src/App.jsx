@@ -34,7 +34,7 @@ function App(props) {
       <div class='App-body'>
         <Routes>
           <Route path="/" element={Home} />
-          <Route path="/signup" element={Signup} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={Signin} />
           <Route path="/profile" element={UserProfile} />
           <Route path="/character-sheet" element={CharacterSheet} />
