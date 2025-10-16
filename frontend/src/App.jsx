@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 // Components
 import Home from './components/Home.jsx';
-import Signup from './components/Signup.jsx';
+import SignupForm from './components/Signup.jsx';
 import Signin from './components/Signin.jsx';
 import UserProfile from './components/UserProfile.jsx';
 import CharacterSheet from './components/CharacterSheet.jsx';
@@ -34,7 +34,7 @@ function App(props) {
       <div class='App-body'>
         <Routes>
           <Route path="/" element={Home} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/signup" element={<SignupForm />} />
           <Route path="/signin" element={Signin} />
           <Route path="/profile" element={UserProfile} />
           <Route path="/character-sheet" element={CharacterSheet} />
