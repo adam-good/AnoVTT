@@ -15,7 +15,7 @@ import GameTable from './components/GameTable.jsx';
 
 export const Header = () => {
   return (
-    <div class='App-header'>
+    <div className='App-header'>
       <h1>AnoVTT</h1>
       <Navbar />
     </div>
@@ -31,7 +31,7 @@ function App(props) {
     <BrowserRouter>
       <div className="App">
       <Header />
-      <div class='App-body'>
+      <div className='App-body'>
         <Routes>
           <Route path="/" element={Home} />
           <Route path="/signup" element={<SignupForm />} />
