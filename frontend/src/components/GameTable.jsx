@@ -1,11 +1,7 @@
 
 
-const GameTable = () => {
-  return (
-    <div>
+const GameTable = (
     <h1>AnoVTT Game Table</h1>
-    </div>
-  );
-}
+);
 
 export default GameTable;

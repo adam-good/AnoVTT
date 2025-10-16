@@ -1,11 +1,7 @@
 
 
-const Campaign = () => {
-  return (
-    <div>
+const Campaign = (
     <h1>AnoVTT Campaign</h1>
-    </div>
-  );
-}
+);
 
 export default Campaign;
