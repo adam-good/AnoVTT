@@ -26,7 +26,7 @@ export const Footer = () => {
   return <p>Copywrite 2025 My Stuff</p>;
 }
 
-function App(props) {
+const App: React.FC = (props) => {
   return (
     <BrowserRouter>
       <div className="App">

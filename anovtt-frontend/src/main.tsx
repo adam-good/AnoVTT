@@ -3,7 +3,12 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 
-createRoot(document.getElementById('root')).render(
+// NOTE: If there's no root, what are you even doing??
+const rootElement: HTMLElement | null = document.getElementById('root');
+if (!rootElement) {
+  throw new Error('Root element not found in DOM!');
+}
+createRoot(rootElement).render(
   <StrictMode>
     <App />
   </StrictMode>,

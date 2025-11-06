@@ -7,7 +7,7 @@ const SignupForm = () => {
         password: ''
     });
 
-    const handleChange = (event) => {
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const {name, value} = event.target;
         setFormData(prevState => ({
             ...prevState,
@@ -16,7 +16,7 @@ const SignupForm = () => {
         console.log("State Updated");
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         // TODO: Submit Form Data to Server
         console.log(`Form Data Submitted: ${event.target}`);
