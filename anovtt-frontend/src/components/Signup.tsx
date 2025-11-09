@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import * as auth_api from "../utils/auth.js";
+import type { AxiosResponse } from "axios";
 
 const SignupForm: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -21,7 +22,7 @@ const SignupForm: React.FC = () => {
     event.preventDefault();
 
     try {
-      const response: Response = await auth_api.default.post(
+      const response: AxiosResponse = await auth_api.default.post(
         "/register",
         formData,
       );
