@@ -25,14 +25,14 @@ export const Footer = () => {
   return <p>Copywrite 2025 My Stuff</p>;
 };
 
-const App: React.FC = (props) => {
+const App: React.FC = () => {
   return (
     <BrowserRouter>
       <div className="App">
         <Header />
         <div className="App-body">
           <Routes>
-            <Route path="/" element={Home} />
+            <Route path="/" element={<Home />} />
             <Route path="/signup" element={<SignupForm />} />
             <Route path="/signin" element={<Signin />} />
             <Route path="/profile" element={UserProfile} />
