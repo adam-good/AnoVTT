@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-//import axios from "axios";
-import api, * as auth_api from "../utils/auth.js";
+import * as auth_api from "../utils/auth.js";
 
 const SignupForm: React.FC = () => {
   const [formData, setFormData] = useState({
