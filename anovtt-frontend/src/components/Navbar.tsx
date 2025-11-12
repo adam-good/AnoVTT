@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import "./Navbar.css";
+import { isLoggedIn, handleLogout } from "../utils/auth.js";
 
 function Navbar() {
   return (
@@ -21,14 +22,22 @@ function Navbar() {
         </ul>
       </div>
       <div className="navbar-right">
-        <ul className="nav-links">
-          <li>
-            <Link to="/signup">Signup</Link>
-          </li>
-          <li>
-            <Link to="/signin">Signin</Link>
-          </li>
-        </ul>
+        {isLoggedIn() ? (
+          <ul className="nav-links">
+            <li>
+              <Link to="/signout">Signout</Link>
+            </li>
+          </ul>
+        ) : (
+          <ul className="nav-links">
+            <li>
+              <Link to="signup">Signup</Link>
+            </li>
+            <li>
+              <Link to="/signin">Signin</Link>
+            </li>
+          </ul>
+        )}
       </div>
     </nav>
   );
