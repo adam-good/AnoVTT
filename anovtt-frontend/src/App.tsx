@@ -11,6 +11,7 @@ import UserProfile from "./components/UserProfile.jsx";
 import CharacterSheet from "./components/CharacterSheet.jsx";
 import Campaign from "./components/Campaign.jsx";
 import GameTable from "./components/GameTable.jsx";
+import Signout from "./components/Signout.js";
 
 export const Header = () => {
   return (
@@ -35,6 +36,7 @@ const App: React.FC = () => {
             <Route path="/" element={<Home />} />
             <Route path="/signup" element={<SignupForm />} />
             <Route path="/signin" element={<Signin />} />
+            <Route path="/signout" element={<Signout />} />
             <Route path="/profile" element={UserProfile} />
             <Route path="/character-sheet" element={CharacterSheet} />
             <Route path="/campaign" element={Campaign} />
