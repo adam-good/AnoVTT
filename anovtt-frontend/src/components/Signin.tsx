@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { handleLogin } from "../utils/auth.js";
+import { authService } from "../services/authService.js";
 
 const Signin: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -17,7 +17,7 @@ const Signin: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    handleLogin(formData);
+    authService.login(formData);
   };
 
   return (

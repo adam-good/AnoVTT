@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import * as auth_api from "../utils/auth.js";
 import type { AxiosResponse } from "axios";
 
 const SignupForm: React.FC = () => {
