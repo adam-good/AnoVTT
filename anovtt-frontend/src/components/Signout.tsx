@@ -1,9 +1,11 @@
 import React from "react";
-import { handleLogout } from "../utils/auth.js";
+import { authService } from "../services/authService.js";
 import { Link } from "react-router-dom";
 
 const Signout: React.FC = () => {
-  handleLogout();
+  authService.logout();
+
+  window.location.href = "/";
 
   return (
     <p>
