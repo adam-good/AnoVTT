@@ -8,7 +8,6 @@ import {
 
 const api = axios.create({
   baseURL: "http://localhost:8080/api/auth",
-  timeout: 1000,
 });
 
 const AUTH_TOKEN_STRING: string = "authToken";

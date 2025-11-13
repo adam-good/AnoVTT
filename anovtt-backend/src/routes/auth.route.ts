@@ -65,13 +65,18 @@ router.post("/login", async (req: Request, res: Response) => {
     }
 
     const token = jwt.sign({ userId: user._id }, "secret", { expiresIn: "1h" });
-    res
+    return res
       .status(200)
       .json({ token, user: { username: user.username, email: user.email } });
   } catch (e) {
     console.log(e);
     return res.status(500).json({ error: "Server Error" });
   }
+});
+
+// TODO: log here
+router.post("/logout", async (req: Request, res: Response) => {
+  return res.status(200);
 });
 
 export default router;
