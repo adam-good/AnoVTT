@@ -51,4 +51,36 @@ export const authService = {
   validateTokens(tokens: Token): boolean {
     return !isExpired(tokens.accessToken);
   },
+
+  // TODO: Token refresh
+  async refreshToken(): Promise<Token | null> {
+    throw Error("refreshToken Not Implemented Yet");
+  },
+
+  // TODO: This should utelize the Result type once I implement it
+  async login(creds: AuthCredidentials): Promise<Token | null> {
+    try {
+      const response = await api.post("/login", creds);
+      const token: Token | null = response.data?.token
+        ? { accessToken: response.data.token }
+        : null;
+
+      if (token) this.setTokens(token);
+
+      return token;
+    } catch (err) {
+      console.log("Login Error: ", err);
+    }
+    return null;
+  },
+
+  async logout(): Promise<void> {
+    try {
+      await api.post("/logout"); // TODO: This needs a backend call
+    } catch (err) {
+      console.log("Logout Error: ", err);
+    } finally {
+      this.removeTokens();
+    }
+  },
 };
