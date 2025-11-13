@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import type { AxiosResponse } from "axios";
+import { authService } from "../services/authService.js";
 
 const SignupForm: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -19,18 +19,7 @@ const SignupForm: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    try {
-      const response: AxiosResponse = await auth_api.default.post(
-        "/register",
-        formData,
-      );
-      if (response.status >= 300) {
-        throw Error(`Error: Response ${response.status}`);
-      }
-    } catch (e) {
-      console.log("Error: ", e);
-    }
+    await authService.register(formData);
   };
 
   return (

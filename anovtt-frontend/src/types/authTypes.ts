@@ -3,7 +3,6 @@ export interface AuthCredidentials {
   password: string;
 }
 
-// TODO: Registration should probably be its own service
 export interface RegistrationCredidentials {
   username: string;
   email: string;

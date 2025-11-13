@@ -1,6 +1,10 @@
 import axios, { type AxiosResponse } from "axios";
 import { isExpired } from "react-jwt";
-import { type AuthCredidentials, type Token } from "../types/authTypes.js";
+import {
+  type AuthCredidentials,
+  type RegistrationCredidentials,
+  type Token,
+} from "../types/authTypes.js";
 
 const api = axios.create({
   baseURL: "http://localhost:8080/api/auth",
@@ -57,5 +61,20 @@ export const authService = {
     } finally {
       this.removeTokens();
     }
+  },
+
+  async register(creds: RegistrationCredidentials): Promise<void> {
+    try {
+      const response: AxiosResponse = await api.post("/register", creds);
+      if (response.status >= 300)
+        throw Error(`Error: Response ${response.status}`);
+    } catch (err) {
+      console.log("Registration Error: ", err);
+    }
+  },
+
+  isLoggedIn(): boolean {
+    const tokens = this.getTokens();
+    return tokens ? this.validateTokens(tokens) : false;
   },
 };

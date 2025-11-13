@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "./Navbar.css";
-import { isLoggedIn, handleLogout } from "../utils/auth.js";
+import { authService } from "../services/authService.js";
 
 function Navbar() {
   return (
@@ -22,7 +22,7 @@ function Navbar() {
         </ul>
       </div>
       <div className="navbar-right">
-        {isLoggedIn() ? (
+        {authService.isLoggedIn() ? (
           <ul className="nav-links">
             <li>
               <Link to="/signout">Signout</Link>
