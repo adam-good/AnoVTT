@@ -1,21 +1,11 @@
 import axios, { type AxiosResponse } from "axios";
 import { isExpired } from "react-jwt";
+import { type AuthCredidentials } from "../types/authTypes.js";
 
 const api = axios.create({
   baseURL: "http://localhost:8080/api/auth",
   timeout: 1000,
 });
-
-export interface LoginFormData {
-  username: string;
-  password: string;
-}
-
-export interface SignupFormData {
-  username: string;
-  email: string;
-  password: string;
-}
 
 export const isLoggedIn: () => boolean = () => {
   const token: string | null = localStorage.getItem("token");
@@ -23,7 +13,7 @@ export const isLoggedIn: () => boolean = () => {
   else return !isExpired(token);
 };
 
-export const handleLogin = async (loginData: LoginFormData) => {
+export const handleLogin = async (loginData: AuthCredidentials) => {
   try {
     const response: AxiosResponse = await api.post("/login", loginData);
     if (response.status >= 300) {
