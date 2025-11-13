@@ -24,7 +24,7 @@ export const authService = {
 
   getTokens(): Token | null {
     const tokenStr: string | null = localStorage.getItem(AUTH_TOKEN_STRING);
-    return tokenStr ? JSON.parse(tokenStr) : null;
+    return tokenStr ? { accessToken: tokenStr } : null;
   },
 
   validateTokens(tokens: Token): boolean {

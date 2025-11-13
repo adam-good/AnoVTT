@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { authService } from "../services/authService.js";
+import { type Token } from "../types/authTypes.js";
 
 const Signin: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -17,7 +18,8 @@ const Signin: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    authService.login(formData);
+    const token: Token | null = await authService.login(formData); // TODO: this should be a Result
+    if (token) window.location.href = "/";
   };
 
   return (
