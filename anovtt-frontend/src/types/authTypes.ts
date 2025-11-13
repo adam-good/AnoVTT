@@ -12,6 +12,5 @@ export interface RegistrationCredidentials {
 
 // TODO: This should wrap the JWT data we get from the server
 export interface Token {
-  accessToken: string;
-  refreshToken?: string;
+  accessToken: string; // For now let's just let this be the JWT
 }

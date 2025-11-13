@@ -1,6 +1,6 @@
 import axios, { type AxiosResponse } from "axios";
 import { isExpired } from "react-jwt";
-import { type AuthCredidentials } from "../types/authTypes.js";
+import { type AuthCredidentials, type Token } from "../types/authTypes.js";
 
 const api = axios.create({
   baseURL: "http://localhost:8080/api/auth",
@@ -32,4 +32,23 @@ export const handleLogout = () => {
   window.location.href = "/"; // TODO: Find better option
 };
 
-//export default api;
+const AUTH_TOKEN_STRING: string = "authToken";
+
+export const authService = {
+  setTokens(tokens: Token): void {
+    localStorage.setItem(AUTH_TOKEN_STRING, tokens.accessToken);
+  },
+
+  removeTokens(): void {
+    localStorage.removeItem(AUTH_TOKEN_STRING);
+  },
+
+  getTokens(): Token | null {
+    const tokenStr: string | null = localStorage.getItem(AUTH_TOKEN_STRING);
+    return tokenStr ? JSON.parse(tokenStr) : null;
+  },
+
+  validateTokens(tokens: Token): boolean {
+    return !isExpired(tokens.accessToken);
+  },
+};
