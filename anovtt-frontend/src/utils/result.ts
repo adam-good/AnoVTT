@@ -1,3 +1,5 @@
+// NOTE: Inspired by https://www.dennisokeeffe.com/blog/2024-07-14-creating-a-result-type-in-typescript
+
 export type Ok<T> = {
   _tag: "success";
   data: T;
