@@ -1,9 +1,14 @@
-export type Result<T, E> = { ok: T; error?: never } | { err: E; ok?: never };
+export type Result<T, E extends Error> =
+  | { ok: T; error?: never }
+  | { error: E; ok?: never };
 
-function ok<T>(value: T): Result<T, any> {
+export type Success<T> = Result<T, any>;
+export type Failure<E extends Error> = Result<any, E>;
+
+export function ok<T>(value: T): Success<T> {
   return { ok: value };
 }
 
-function err<E>(error: E): Result<any, E> {
-  return { err: error };
+export function err<E extends Error>(error: E): Failure<E> {
+  return { error: error };
 }
