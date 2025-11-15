@@ -5,7 +5,13 @@ import {
   type RegistrationCredidentials,
   type Token,
 } from "../types/authTypes.js";
-import { ok, err, type Success, type Failure } from "../utils/result.js";
+import {
+  ok,
+  err,
+  type Success,
+  type Failure,
+  type Result,
+} from "../utils/result.js";
 
 const api = axios.create({
   baseURL: "http://localhost:8080/api/auth",
@@ -55,13 +61,18 @@ export const authService = {
     }
   },
 
-  async logout(): Promise<void> {
+  logout(): Success<null> | Failure<Error> {
+    let result: Result<void, Error> = ok(undefined);
     try {
-      await api.post("/logout"); // TODO: This needs a backend call
-    } catch (err) {
-      console.log("Logout Error: ", err);
+      //TODO: implement this for logging some day
+      //await api.post("/logout");
+      result = ok(undefined);
+    } catch (e) {
+      console.log("Logout Error: ", e);
+      result = err(new Error("Logout Error"));
     } finally {
       this.removeTokens();
+      return result;
     }
   },
 
