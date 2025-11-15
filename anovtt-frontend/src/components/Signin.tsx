@@ -21,7 +21,7 @@ const Signin: React.FC = () => {
     event.preventDefault();
     const token: Result<Token, Error> = await authService.login(formData); // TODO: this should be a Result
     if (token.ok) window.location.href = "/";
-    else alert("LOGIN ERROR");
+    else alert(token.error.message);
   };
 
   return (
