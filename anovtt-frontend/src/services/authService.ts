@@ -5,6 +5,7 @@ import {
   type RegistrationCredidentials,
   type Token,
 } from "../types/authTypes.js";
+import { ok, err, type Success, type Failure } from "../utils/result.js";
 
 const api = axios.create({
   baseURL: "http://localhost:8080/api/auth",
@@ -36,7 +37,9 @@ export const authService = {
   },
 
   // TODO: This should utelize the Result type once I implement it
-  async login(creds: AuthCredidentials): Promise<Token | null> {
+  async login(
+    creds: AuthCredidentials,
+  ): Promise<Success<Token> | Failure<Error>> {
     try {
       const response = await api.post("/login", creds);
       const token: Token | null = response.data?.token
@@ -45,11 +48,11 @@ export const authService = {
 
       if (token) this.setTokens(token);
 
-      return token;
-    } catch (err) {
-      console.log("Login Error: ", err);
+      return ok(token);
+    } catch (e) {
+      console.log("Login Error: ", e);
+      return err(new Error("Login Error"));
     }
-    return null;
   },
 
   async logout(): Promise<void> {
