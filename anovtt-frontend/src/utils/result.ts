@@ -6,6 +6,7 @@ type ResultElement<T, E extends Error> =
   | { data: T; error?: never }
   | { error: E; data?: never };
 
+// TODO: Rewrite this so that Result<T,E> = Success<T> | Failure<E>
 export type Success<T> = Result<T, any>;
 export type Failure<E extends Error> = Result<any, E>;
 export class Result<T, E extends Error> {

@@ -22,9 +22,11 @@ export const authService = {
     localStorage.removeItem(AUTH_TOKEN_STRING);
   },
 
-  getTokens(): Token | null {
+  getTokens(): Success<Token> | Failure<Error> {
     const tokenStr: string | null = localStorage.getItem(AUTH_TOKEN_STRING);
-    return tokenStr ? { accessToken: tokenStr } : null;
+    return tokenStr
+      ? Result.ok({ accessToken: tokenStr })
+      : Result.err(Error("Token Not Found"));
   },
 
   validateTokens(tokens: Token): boolean {
@@ -82,6 +84,6 @@ export const authService = {
 
   isLoggedIn(): boolean {
     const tokens = this.getTokens();
-    return tokens ? this.validateTokens(tokens) : false;
+    return tokens.isSuccess() ? this.validateTokens(tokens.value) : false;
   },
 };
