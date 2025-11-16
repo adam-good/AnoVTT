@@ -1,17 +1,17 @@
-const SUCCESS_TAG: string = "success";
-const FAILURE_TAG: string = "failure";
+type result_tag = "success" | "failure";
+const SUCCESS_TAG: result_tag = "success";
+const FAILURE_TAG: result_tag = "failure";
+
 type ResultElement<T, E extends Error> =
   | { data: T; error?: never }
   | { error: E; data?: never };
 
-type Empty = {};
-
 export type Success<T> = Result<T, any>;
 export type Failure<E extends Error> = Result<any, E>;
 export class Result<T, E extends Error> {
-  _tag: string;
+  _tag: result_tag;
   _element: ResultElement<T, E>;
-  protected constructor(_tag: string, value: T | null, error: E | null) {
+  protected constructor(_tag: result_tag, value: T | null, error: E | null) {
     this._tag = _tag;
     if (value) this._element = { data: value };
     else if (error) this._element = { error: error };
