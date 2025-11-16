@@ -1,12 +1,12 @@
 import React from "react";
 import { authService } from "../services/authService.js";
 import { Link } from "react-router-dom";
-import { isSuccess, type Result } from "../utils/result.js";
+import { type Result } from "../utils/result.js";
 
 const Signout: React.FC = () => {
-  const result: Result<null | void, Error> = authService.logout();
-  if (isSuccess(result)) window.location.href = "/";
-  else alert(result.error?.message);
+  const result: Result<null, Error> = authService.logout();
+  if (result.isSuccess()) window.location.href = "/";
+  else alert(result.error.message);
 
   return (
     <p>
